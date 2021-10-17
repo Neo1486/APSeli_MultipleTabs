@@ -1,0 +1,16 @@
+from selenium import webdriver
+
+driver = webdriver.Edge(#you need to fill in the executable Path)
+
+driver.get("http://the-internet.herokuapp.com/windows")
+#use the below for clicking links. Just enter the link name as you see on the page
+driver.find_element_by_link_text("Click Here").click()
+#this line of code creates a list of all active windows now
+#as I am after the new window I want the 2nd window in the list open
+new_window = driver.window_handles[1]
+#use the below to set the automation script to work off the new tab
+driver.switch_to.window(new_window)
+driver.close()
+driver.switch_to.window(driver.window_handles[0])
+print(driver.find_element_by_tag_name("h3").text)
+assert "Opening a new window" == driver.find_element_by_tag_name("h3").text
