@@ -1,0 +1,26 @@
+from selenium import webdriver
+import time
+
+driver = webdriver.Edge(#you will need to enter your executable path here")
+
+# Launch website
+driver.get("https://rahulshettyacademy.com/seleniumPractise/#/")
+
+# Find search bar
+driver.find_element_by_css_selector("input[type='search']").send_keys("ber")
+# wait for the search
+time.sleep(2)
+# identify each result returned from the search
+count = len(driver.find_elements_by_xpath("//div[@class='product-action']/button"))
+# check the search result is 3
+assert count == 3
+# create a variable that is each add to cart button
+buttons = driver.find_elements_by_xpath("//div[@class='product-action']/button")
+# create a for loop to click each button returned from the count
+for button in buttons:
+    button.click()
+
+#this finds the items in the cart
+items_in_cart = driver.find_element_by_xpath("//tr[1]//td[3]//strong[1]")
+#this checks the items in the cart matches the total you buttons you clicked
+assert int(items_in_cart.text) == count
