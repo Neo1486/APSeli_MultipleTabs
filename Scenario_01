@@ -1,6 +1,6 @@
 from selenium import webdriver
 
-driver = webdriver.Edge(#you need to fill in the executable Path)
+driver = webdriver.Edge(#you need to fill in the executable Path here)
 
 driver.get("http://the-internet.herokuapp.com/windows")
 #use the below for clicking links. Just enter the link name as you see on the page
