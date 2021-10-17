@@ -1,0 +1,32 @@
+from selenium import webdriver
+import time
+
+driver = webdriver.Edge(#you need to insert your executable path here)
+
+# Launch website
+driver.get("https://rahulshettyacademy.com/seleniumPractise/#/")
+driver.implicitly_wait(4)
+list1 = []
+# Find search bar
+driver.find_element_by_css_selector("input[type='search']").send_keys("ber")
+# wait for the search
+time.sleep(2)
+# create a variable that is each add to cart button
+buttons = driver.find_elements_by_xpath("//div[@class='product-action']/button")
+# create a for loop to click each button returned from the count
+for button in buttons:
+    list1.append(button.find_element_by_xpath("parent::div/parent::div/h4").text)
+    button.click()
+
+driver.find_element_by_xpath("//a[@class='cart-icon']//img[contains(@class,'')]").click()
+driver.find_element_by_xpath("//button[contains(text(),'PROCEED TO CHECKOUT')]").click()
+
+
+list2 = []
+
+products = driver.find_elements_by_css_selector("p.product-name")
+
+for product in products:
+    list2.append(product.text)
+
+print(list2)
